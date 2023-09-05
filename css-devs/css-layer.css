@@ -1,0 +1,55 @@
+
+/* need style-loader 3.3.0   and  mini-css-extract-plugin 2.7.4 -vers*/
+
+
+/* https://caniuse.com/css-cascade-layers */
+
+/* Полифил под любой браузер */
+/* https://www.npmjs.com/package/@csstools/postcss-cascade-layers */
+
+@import url('sth.css') layer(widget);
+@layer layer1, layer2, layer3;
+/* layer3  - ИМЕЕТ САМЫЙ ВЫСОКИЙ ПРИОРИТЕТ СРЕДИ LAYERS, ПОКУДА ОБЪЯВЛЕН ПОСЛЕДНИМ */
+
+/* Очередность не имеет значения при объявлении приоритета выше строчкой */
+@layer layer1 {
+	/* ... */
+	div{
+		font-size: 20px;
+	}
+}
+@layer layer3 {
+	/* ... */
+	div{
+		font-size: 20px;
+	}
+}
+@layer layer2 {
+	/* ... */
+	div{
+		font-size: 20px;
+	}
+}
+
+
+/* Вложенность слоев */
+@layer layer10 {
+	/* ... */
+	div{
+		font-size: 20px;  /* Высокий приоритет, не зависимо от позиции в коде */
+	}
+	@layer layer10_11 {
+		/* ... */
+		div{
+			font-size: 24px; /* Низкий приоритет */
+		}
+	}
+}
+
+
+@layer themes {
+	@layer dark, light, default;
+	/* Здесь объявляеются все слои, но используется defaul, покуда сильнее приоритет в слоях */
+
+	/* Ниже реализация слоев по отдельности */
+}

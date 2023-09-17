@@ -28,10 +28,78 @@
 
 // Сетевая модель OSI - The Open Systems Interconnection model (вз-вие открытых систем)
 // сетевая модель стека сетевых протоколов OSI/ISO.
-// 7. Прикладной (application)
-// 6. Представления (presentation)
-// 5. Сеансовый (session)
-// 4. Транспортный (transport)
-// 3. Сетевой (network)					- IPv4, IPv6, IPsec,
-// 2. Канальный (data link)			- PPP, IEEE 802.22, Ethernet
-// 1. Физический (physical)			- «витая пара»
+// 7. Прикладной (application)		- HTTP, FTP, POP3, SMTP, WebSocket - наш домик
+// 6. Представления (presentation)	- SSL, gzip, ASCII, EBCDIC - ШИФРОВАНИЕ И ПРЕДСТАВЛЕНИЕ ДАННЫХ
+// 5. Сеансовый (session)				- RPC, PAP, L2TP, gRPC		- УПРАВЛЕНИЕ СЕАНСАМИ СВЯЗИ
+// 4. Транспортный (transport)		- TCP, UDP, SCTP, Порты
+// 3. Сетевой (network)					- IPv4, IPv6, IPsec
+// 2. Канальный (data link)			- PPP, IEEE 802.22, Ethernet - ФИЗИЧЕСКАЯ АДРЕСАЦИЯ
+// 1. Физический (physical)			- «витая пара»					- ДВОИЧНЫЕ ДАННЫЕ
+
+
+// HTTP - HyperText Transfer Protocol
+// - протокол прикладного уровня передачи различных данных
+// Основой HTTP является технология «клиент-сервер»
+// Клиент посылает запрос, сервер ожидает запрос и отсылает результат
+// Еще есть Прокси (посредники) для выполнения транспортных служб.
+
+// Структура HTTP-сообщения
+//
+// 	Каждое HTTP-сообщение состоит из трёх частей, которые передаются в указанном порядке:
+// 	Стартовая строка(англ.Starting line) — определяет тип сообщения;
+// 	Заголовки(англ.Headers) — характеризуют тело сообщения, параметры передачи и прочие сведения;
+// 	Тело сообщения(англ.Message Body) — непосредственно данные сообщения.Обязательно должно отделяться от заголовков пустой строкой.
+// 	Body может отсутствовать, но Starting line и Headers обязательные элементы
+
+// Starting line различаются для request и response
+//    request => METHOD URI HTTP/Версия
+// 		METHODS: GET POST PUT PATCH DELETE TRACE CONNECT HEAD OPTIONS
+// 			пример пингование OPTIONS * HTTP/1.1
+// 		URI: путь к запрашиваемому документу
+// 	response => HTTP/Версия StatusCode ReasonPhrase?
+
+// 		Коды состояния ответа на HTTP запрос
+// 		https://ru.wikipedia.org/wiki/Список_кодов_состояния_HTTP
+// 		200 OK   201 Created 	202 Accepted		100 Continue	304 Not Modified	300 Redirected
+// 		4** Client Error   400 Bad request	401 Unauth	402 Payment required	403 Forbidden	404 Not Found
+// 		410 Deleted 423 Locked		5** Server Error	500 internal server error	501 Not implemented
+// 		502 Bad Gateway	503 Service Unavailbale		504 Gateway timeout
+
+// Headers - метаинформация HTTP сообщения
+// 	Делятся на General, Request, Response, Entity(дополнительная инф.)
+// 	content-type: text/html; - Формат и способ представления сущности.
+// 	User-Agent	- Список названий и версий клиента и его компонентов с комментариями.
+
+/*
+	Body - если оно присутствует, используется для передачи тела объекта, связанного с запросом или ответом
+req
+	GET /wiki/страница HTTP/1.1
+	Host: ru.wikipedia.org
+	User-Agent: Mozilla/5.0 (X11; U; Linux i686; ru; rv:1.9b5) Gecko/2008050509 Firefox/3.0b5
+	Accept: text/html
+	Connection: close
+
+res
+	HTTP/1.1 200 OK
+	Date: Wed, 11 Feb 2009 11:20:59 GMT
+	Server: Apache
+	X-Powered-By: PHP/5.2.4-2ubuntu5wm1
+	Last-Modified: Wed, 11 Feb 2009 11:20:59 GMT
+	Content-Language: ru
+	Content-Type: text/html; charset=utf-8
+	Content-Length: 1234
+	Connection: close
+*/
+
+// Актуальная версия HTTP - 2.
+// На данный момент разрабатывает HTTP/3. Существует черновая реализация.
+
+// HTTPS - HyperText Transfer Protocol Secure - расширение протокола
+// для поддержки шифрования. TLS - Transport layer security протокол защиты на транспортом уровне
+//	SSL - предыдущый протокол шифрования.
+
+// 	Технология крипозащиты - ассимитричное шифрование для аутентификации,
+// 	(с открытым ключом по незащищенному каналу с расшифровкой закрытым ключом
+// 	с последующей генерацией Электронной Подписи)
+// 	симметричное шифрование для конфиденциальности,
+// 	и коды аутентичности сообщений для сохранения целостности сообщений.

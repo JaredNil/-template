@@ -1,40 +1,12 @@
-const user = {
-	firstName: "Pat",
-	age: 23,
-	isNice: false,
-	role: "CTO",
-	skills: ["HTML", "CSS", "jQuery"]
-}
+import React from 'react'
 
-type User = {
-	firstName: string;
-	age: number;
-	isNice: boolean;
-	role: string;
-	skills: string[];
-}
-
-type User2 = {
-	// ...
-	friends: User[];
-}
-
-const user2 = {
-	firstName: "Pat",
-	age: 23,
-	isNice: false,
-	role: "CTO",
-	skills: ["CSS", "HTML", "jQuery"],
-	friends: undefined,
-}
-
-
+// ENUMIRATION IN TS
 enum UserRole {
 	CEO = "ceo",
 	CTO = "cto",
 	SUBORDINATE = "inferior-person",
 }
-type User3 = {
+type User = {
 	firstName: string;
 	age: number;
 	isNice: boolean;
@@ -42,8 +14,7 @@ type User3 = {
 	skills: string[];
 	friends?: User[];
 }
-
-const user3 = {
+const user: User = {
 	firstName: "Pat",
 	age: 23,
 	isNice: false,
@@ -53,26 +24,29 @@ const user3 = {
 
 
 
-
-const fireUser = (firstName: string, age: number, isNice: boolean) => {
-	// ...
-}
-function fireUser2({ firstName, age, isNice }: {
-	firstName: string;
-	age: number;
-	isNice: boolean;
-}) {
-	// ...
-}
-
-
-type User4 = {
+// FUNCTION
+// best practice for props component
+type Usersth = {
 	firstName: string;
 	age: number;
 	role: UserRole;
 }
-
-function fireUser3({ firstName, age, role }: User) {
-	// ...
+function fireUser({ firstName, age, role }: Usersth): Usersth {
+	//  ...  //
+	return { firstName, age, role }
 }
+//  //  //  //  //  //
+
+
+// Различие interface и type 
+// ::: интерфейс можно нативно расширять через extends
+
+
+
+
+// REACT WITH TS
+
+// Типизация useState через дженерик
+const [names, setNames] = useState<string[]>([]);
+setNames(["Pat", "Lisa"]);
 
